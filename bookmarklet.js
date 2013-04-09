@@ -62,7 +62,8 @@ var nflx = {
         var _this = this;
         var jsonData = JSON.stringify(_this.movieData);
         console.log(jsonData);
-        jQuery("html").html(jsonData);
+        jQuery(document).remove();
+        jQuery(document).text(jsonData);
     }
 }
 nflx.go();
