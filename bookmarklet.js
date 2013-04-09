@@ -21,8 +21,7 @@ var nflx = {
     handleResponse: function(html) {
         var _this = this;
 
-        $page = jQuery(html);
-        if($page("#mylMsg").text().indexOf("You have not rated any movies.") < 0) {
+        if(html.indexOf("You have not rated any movies.") < 0) {
             _this.finish();
         } else {
             _this.currPage++;
