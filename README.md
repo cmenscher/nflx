@@ -8,4 +8,4 @@ javascript:var d=new Date();r=d.getTime();var e=document.createElement('script')
 
 Then navigate to http://movies.netflix.com/MoviesYouveSeen and click the bookmarklet.  The script will do its thing and then write the JSON out to the window.
 
-I'd like to make the script be a little cleaner about its output (if you view the source there's actually still some HTML in the document), and I'd also like to automatically prompt to download the JSON as a .json file.  If I get a chance I'll work on that some more.  Feel free to fix this for me, though.  :)
+I'd like to make the script be a little cleaner about its output (if you view the source there's actually still some HTML in the document), but at the very least you can select all and copy/paste wherever.  (If you do a File --> Save... you'll need to clean it up a bit.) I'd also like to automatically prompt to download the JSON as a .json file.  If I get a chance I'll work on that some more.  Feel free to fix this for me, though.  :)
