@@ -4,14 +4,14 @@ var nflx = {
     movieData: [],
 
     go: function(html) {
-        console.log("GO!!!!");
+        console.log("SCRAPING...");
         var _this = this;
         arguments.length === 0 ? _this.scrape() : _this.scrape(html);
     },  
 
     handleResponse: function(html) {
         if(html.indexOf("You have not rated any movies.") > 0) {
-            console.log("DONE!");
+            console.log("DONE SCRAPING!");
             nflx.finish();
         } else {
             nflx.go(html);
@@ -60,7 +60,9 @@ var nflx = {
 
     finish: function() {
         var _this = this;
-        console.log(JSON.stringify(_this.movieData));
+        var jsonData = JSON.stringify(_this.movieData);
+        console.log(jsonData);
+        jQuery("html").html(jsonData);
     }
 }
 nflx.go();
