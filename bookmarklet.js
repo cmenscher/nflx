@@ -1,36 +1,24 @@
 var nflx = {
-    currPage: 0,
+    currPage: 1,
     pageURL: document.location.href,
     movieData: [],
 
-    go: function() {
+    go: function(html) {
         console.log("GO!!!!");
         var _this = this;
-        _this.scrape();
-
-        jQuery.ajax({
-            type: 'GET',
-            dataType: 'html',
-            url: _this.pageURL,
-            data: _this.currPage,
-            async: false,
-            success: _this.handleResponse
-        });
+        arguments.length === 0 ? _this.scrape() : _this.scrape(html);
     },  
 
     handleResponse: function(html) {
-        var _this = this;
-
-        if(html.indexOf("You have not rated any movies.") < 0) {
-            _this.finish();
+        if(html.indexOf("You have not rated any movies.") > 0) {
+            console.log("DONE!");
+            nflx.finish();
         } else {
-            _this.currPage++;
-            _this.go();
-
+            nflx.go(html);
         }
     },
 
-    process: function(movies) {
+    process: function(movies, callback) {
         var _this = this;
         movies.each(function(index) {
             var data = {};
@@ -47,6 +35,7 @@ var nflx = {
             data.rating = rating;
             _this.movieData.push(data);
         });
+        callback();
     },
 
     scrape: function(str) {
@@ -54,11 +43,19 @@ var nflx = {
         var movies;
         if(arguments.length > 0) {
             jQuery("html").html(str);
-        } else {
-            movies = jQuery(".agMovie");
-            var $movies=jQuery(movies);
-            _this.process(movies);
         }
+        movies = jQuery(".agMovie");
+        var $movies=jQuery(movies);
+        _this.process(movies, function() {
+            _this.currPage++;
+            jQuery.ajax({
+                type: 'GET',
+                dataType: 'html',
+                url: _this.pageURL+"?pn="+_this.currPage,
+                async: false,
+                success: _this.handleResponse
+            });            
+        });
     },
 
     finish: function() {
