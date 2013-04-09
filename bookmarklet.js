@@ -61,6 +61,9 @@ var nflx = {
     finish: function() {
         var _this = this;
         var jsonData = JSON.stringify(_this.movieData);
+        console.log(jsonData);
+
+        /* Removing the stuff Jeffrey Tierney added b/c it doesn't work in all Chrome installs
         if(window.Blob && (window.createObjectURL || window.webkitURL.createObjectURL)) {
             var blob = new Blob([jsonData], {type: "application/octet-stream"}),
                 saveas = document.createElement("iframe");
@@ -69,9 +72,10 @@ var nflx = {
             (document.body || document.getElementsByTagName("html")[0]).appendChild(saveas);
         }
         else {
+        */
           jQuery(document).remove();
           jQuery(document).text(jsonData);
-        }
+        /* } */
     }
 }
 nflx.go();
