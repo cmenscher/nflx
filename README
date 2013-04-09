@@ -2,9 +2,7 @@ This javascript script will traverse your Netflix history and ratings from the "
 
 To use the script, create a new bookmarklet in your browser with the following code:
 
-```javascript
-javascript:var d=new Date();r=d.getTime();var e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('src','https://raw.github.com/cmenscher/nflx/master/bookmarklet.js?r='+r);document.body.appendChild(e);void(0);
-```
+    javascript:var d=new Date();r=d.getTime();var e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('src','https://raw.github.com/cmenscher/nflx/master/bookmarklet.js?r='+r);document.body.appendChild(e);void(0);
 
 Then navigate to http://movies.netflix.com/MoviesYouveSeen and click the bookmarklet.  The script will do its thing and then write the JSON out to the window.
 
