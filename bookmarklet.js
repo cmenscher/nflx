@@ -2,6 +2,7 @@ var nflx = {
     currPage: 1,
     pageURL: document.location.href,
     movieData: [],
+    test: "",
 
     go: function(html) {
         console.log("SCRAPING...");
@@ -42,7 +43,7 @@ var nflx = {
         var _this = this;
         var movies;
         if(arguments.length > 0) {
-            jQuery("html").html(str);
+            jQuery("body").html(str);
         }
         movies = jQuery(".agMovie");
         var $movies=jQuery(movies);
@@ -63,7 +64,6 @@ var nflx = {
         var jsonData = JSON.stringify(_this.movieData);
         console.log(jsonData);
 
-        /* Removing the stuff Jeffrey Tierney added b/c it doesn't work in all Chrome installs
         if(window.Blob && (window.createObjectURL || window.webkitURL.createObjectURL)) {
             var blob = new Blob([jsonData], {type: "application/octet-stream"}),
                 saveas = document.createElement("iframe");
@@ -72,10 +72,15 @@ var nflx = {
             (document.body || document.getElementsByTagName("html")[0]).appendChild(saveas);
         }
         else {
-        */
-          jQuery(document).remove();
-          jQuery(document).text(jsonData);
-        /* } */
+            var jsonField = document.createElement("textarea");
+            jsonField.setAttribute("style", "display: block; position: absolute; top: 0px; width: 100%; height: 100%; z-index: 1000;");
+            document.body.appendChild(jsonField);
+
+            var jsonVal = document.createTextNode(jsonData);
+            jsonField.appendChild(jsonVal);
+            jsonField.select();
+            alert("You data has been liberated! Just copy and paste into a document.");
+        }
     }
 }
 nflx.go();
